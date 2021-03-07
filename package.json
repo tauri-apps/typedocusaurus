@@ -1,0 +1,10 @@
+{
+  "name": "typedocusaurus",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "typedoc": "^0.20.30",
+    "typedoc-plugin-markdown": "^3.6.0"
+  }
+}
