@@ -1,57 +1,32 @@
 const core = require("@actions/core");
-const { transformDocs } = require("../main");
-const generateSidebar = require("../generateSidebar");
-const { readFile, writeFile } = require("fs").promises;
+const { rmdir } = require("fs").promises;
+const { default: generate } = require("../src/plugin");
 
 (async () => {
   try {
     // Where your docs live, should be the folder containing the crates docs
     const originPath = core.getInput("originPath"); // e.g. "/path/to/project/src/";
 
+    const sidebarFile = process.env["sidebarFile"];
     // Where you'll save your MD files
     const targetPath = core.getInput("targetPath"); // e.g. "/path/to/docusaurus/website/docs/api/js/";
+    const docusaurusPath = core.getInput("docusaurusPath");
 
-    /*
-    Where lives your sidebars config file
-    Doesn't have to be JSON but it's easier to change programmatically, 
-    you may create your own saving method
-    */
-    const sidebarPath = core.getInput("sidebarPath"); // e.g. "/path/to/docusaurus/website/sidebars.json";
+    await rmdir(targetPath, { recursive: true });
 
-    // rustdoc uses relative links for crate types relations
-    const linksRoot = core.getInput("linksRoot"); // e.g. "/docs/api/rust/";
-
-    const entryPoints = core.getInput("entryPoints").split(",");
-
-    // await Promise.all(
-    //   entryPoints.map((entryPoint) =>
-    //     fs.rmdir(targetPath + entryPoint, { recursive: true })
-    //   )
-    // );
-
-    // const sidebarItems = (
-    //   await Promise.all(
-    //     entryPoints.map(async (entryPoint) => ({
-    //       entryPoint,
-    //       docs: await transformDocs(
-    //         originPath + entryPoint,
-    //         originPath,
-    //         targetPath
-    //       ),
-    //     }))
-    //   )
-    // ).map((item) => generateSidebar(item.docs, item.entryPoint, originPath));
-    const sidebarItems = generateSidebar(item.docs, item.entryPoint, originPath)
-
-    // Automatically add the sidebar items to Docusaurus sidebar file config
-    const sidebarContent = JSON.parse(await readFile(sidebarPath, "utf-8"));
-    const index = sidebarContent.docs[3].items
-      .map((row, index) => (row.label && row.label === "JavaScript" ? index : 0))
-      .reduce((accumulator, value) => accumulator + value);
-    sidebarContent.docs[3].items[index].items = sidebarItems; // Specify where to put the items
-    
-    console.log(sidebarContent);
-    // writeFile(sidebarPath, JSON.stringify(sidebarContent, null, 2));
+    await generate(docusaurusPath, {
+      entryPoints: originPath + "src",
+      out: targetPath,
+      entryDocument: "index.md",
+      hideInPageTOC: true,
+      hideBreadcrumbs: true,
+      watch: false,
+      tsconfig: originPath + "tsconfig.json",
+      sidebar: {
+        sidebarFile,
+      },
+      readme: "none",
+    });
 
     console.log("Tasks completed!");
   } catch (error) {
