@@ -1,0 +1,13 @@
+{
+  "name": "typedocusaurus-action",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "run-source": "node index.js",
+    "build": "ncc build index.js -o dist"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@zeit/ncc": "^0.22.3"
+  }
+}
