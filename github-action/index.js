@@ -7,7 +7,7 @@ const { default: generate } = require("../src/plugin");
     // Where your docs live, should be the folder containing the crates docs
     const originPath = core.getInput("originPath"); // e.g. "/path/to/project/src/";
 
-    const sidebarFile = process.env["sidebarFile"];
+    const sidebarFile = core.getInput("sidebarFile");
     // Where you'll save your MD files
     const targetPath = core.getInput("targetPath"); // e.g. "/path/to/docusaurus/website/docs/api/js/";
     const docusaurusPath = core.getInput("docusaurusPath");
