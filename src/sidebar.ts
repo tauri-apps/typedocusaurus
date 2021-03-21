@@ -1,9 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
-
+// @ts-ignore
 import { BindOption } from 'typedoc';
+// @ts-ignore
 import { Component } from 'typedoc/dist/lib/converter/components';
+// @ts-ignore
 import { RendererComponent } from 'typedoc/dist/lib/output/components';
+// @ts-ignore
 import { RendererEvent } from 'typedoc/dist/lib/output/events';
 
 import { SidebarItem, SidebarOptions } from './types';
@@ -19,12 +22,14 @@ export class SidebarComponent extends RendererComponent {
   out!: string;
 
   initialize() {
+    // @ts-ignore
     this.listenTo(this.application.renderer, {
       [RendererEvent.BEGIN]: this.onRendererBegin,
     });
   }
 
   async onRendererBegin(renderer: RendererEvent) {
+    // @ts-ignore
     const navigation = this.application.renderer.theme?.getNavigation(
       renderer.project,
     );
@@ -76,6 +81,7 @@ export class SidebarComponent extends RendererComponent {
     sidebarContent.docs[3].items[index].items = sidebarItems; // Specify where to put the items
 
     writeFile(sidebarPath, JSON.stringify(sidebarContent, null, 2));
+    // @ts-ignore
     this.application.logger.success(
       `TypeDoc sidebar written to ${sidebarPath}`,
     );

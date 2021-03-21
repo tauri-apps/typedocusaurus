@@ -1,4 +1,6 @@
+// @ts-ignore
 import { Application } from 'typedoc';
+// @ts-ignore
 import * as MarkdownPlugin from 'typedoc-plugin-markdown';
 
 import { FrontMatterComponent } from './front-matter';
@@ -34,9 +36,11 @@ export default async function generate(
   app.bootstrap(options);
 
   // add frontmatter component to typedoc renderer
+  // @ts-ignore
   app.renderer.addComponent('fm', new FrontMatterComponent(app.renderer));
 
   // add sidebar component to typedoc renderer
+  // @ts-ignore
   app.renderer.addComponent('sidebar', new SidebarComponent(app.renderer));
 
   // return the generated reflections

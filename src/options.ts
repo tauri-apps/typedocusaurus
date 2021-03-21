@@ -1,12 +1,19 @@
 import * as path from 'path';
 
 import {
+  // @ts-ignore
   Application,
+  // @ts-ignore
   MixedDeclarationOption,
+  // @ts-ignore
   ParameterType,
+  // @ts-ignore
   StringDeclarationOption,
+  // @ts-ignore
   TSConfigReader,
+  // @ts-ignore
   TypeDocReader,
+  // @ts-ignore
 } from 'typedoc';
 
 import { PluginOptions, SidebarOptions } from './types';

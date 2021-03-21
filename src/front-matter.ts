@@ -1,12 +1,17 @@
 import * as path from 'path';
 
+// @ts-ignore
 import { BindOption } from 'typedoc';
+// @ts-ignore
 import { Component } from 'typedoc/dist/lib/converter/components';
+// @ts-ignore
 import { RendererComponent } from 'typedoc/dist/lib/output/components';
+// @ts-ignore
 import { PageEvent } from 'typedoc/dist/lib/output/events';
 
 import { FrontMatter, Sidebar } from './types';
 
+// @ts-ignore
 import { reflectionTitle } from 'typedoc-plugin-markdown/dist/resources/helpers/reflection-title';
 
 export interface FrontMatterVars {
@@ -70,6 +75,7 @@ export class FrontMatterComponent extends RendererComponent {
 
   initialize() {
     super.initialize();
+    // @ts-ignore
     this.listenTo(this.application.renderer, {
       [PageEvent.END]: this.onPageEnd,
     });

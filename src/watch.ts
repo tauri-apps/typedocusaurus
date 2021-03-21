@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-
+// @ts-ignore
 import { Application } from 'typedoc';
 
 import { PluginOptions } from './types';

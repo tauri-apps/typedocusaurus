@@ -1,4 +1,6 @@
+// @ts-ignore
 import { ProjectReflection, UrlMapping } from 'typedoc';
+// @ts-ignore
 import { RendererEvent } from 'typedoc/dist/lib/output/events';
 import * as ts from 'typescript';
 
