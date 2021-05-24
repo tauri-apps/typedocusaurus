@@ -10,7 +10,7 @@ import { RendererComponent } from 'typedoc/dist/lib/output/components';
 import { RendererEvent } from 'typedoc/dist/lib/output/events';
 
 import { SidebarItem, SidebarOptions } from './types';
-import { readFile, writeFile } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 
 @Component({ name: 'sidebar' })
 export class SidebarComponent extends RendererComponent {
@@ -73,14 +73,8 @@ export class SidebarComponent extends RendererComponent {
       : [];
 
     const sidebarPath = this.sidebar.sidebarPath;
-    
-    const sidebarContent = JSON.parse(await readFile(sidebarPath!, "utf-8"));
-    const index = sidebarContent.docs[3].items
-      .map((row, index) => (row.label && row.label === "JavaScript" ? index : 0))
-      .reduce((accumulator, value) => accumulator + value);
-    sidebarContent.docs[3].items[index].items = sidebarItems; // Specify where to put the items
 
-    writeFile(sidebarPath, JSON.stringify(sidebarContent, null, 2));
+    writeFile(sidebarPath, JSON.stringify(sidebarItems, null, 2));
     // @ts-ignore
     this.application.logger.success(
       `TypeDoc sidebar written to ${sidebarPath}`,
@@ -92,9 +86,9 @@ export class SidebarComponent extends RendererComponent {
    */
   getSidebarCategory(title: string, items: SidebarItem[]) {
     return {
+      items,
       type: 'category',
       label: title,
-      items,
     };
   }
 

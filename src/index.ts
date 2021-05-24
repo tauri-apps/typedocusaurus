@@ -1,13 +1,15 @@
-// const core = require("@actions/core");
+let core = require("@actions/core");
 const { rmdir } = require("fs").promises;
 
 const path = require("path");
 
 const overrideRequire = require("override-require");
-const core = {
-  getInput: (variable) => process.env[variable],
-  setFailed: (message) => console.log(message)
-};
+if (process.env.DEV) {
+  core = {
+    getInput: (variable) => process.env[variable],
+    setFailed: (message) => console.log(message)
+  };
+}
 (async () => {
   try {
     // Where your docs live, should be the folder containing the crates docs

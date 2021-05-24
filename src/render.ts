@@ -2,7 +2,6 @@
 import { ProjectReflection, UrlMapping } from 'typedoc';
 // @ts-ignore
 import { RendererEvent } from 'typedoc/dist/lib/output/events';
-import * as ts from 'typescript';
 
 export async function render(
   project: ProjectReflection,
@@ -26,11 +25,11 @@ export async function render(
   if (!output.isDefaultPrevented) {
     output.urls?.forEach((mapping: UrlMapping, i) => {
       this.renderDocument(output.createPageEvent(mapping));
-      ts.sys.write(
+      console.log(
         `\rGenerated ${i + 1} of ${output.urls?.length} TypeDoc docs`,
       );
     });
-    ts.sys.write(`\n`);
+    console.log(`\n`);
     this.trigger(RendererEvent.END, output);
   }
 }
