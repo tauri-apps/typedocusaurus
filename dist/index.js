@@ -453,7 +453,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 270:
+/***/ 527:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
@@ -549,10 +549,10 @@ let FrontMatterComponent = class FrontMatterComponent extends output_components.
         const pageTitle = this.getTitle(page);
         const sidebarLabel = this.getSidebarLabel(page);
         let items = {
-        // title: pageTitle,
+            title: pageTitle,
         };
         if (sidebarLabel && sidebarLabel !== pageTitle) {
-            items = { sidebar_label: sidebarLabel };
+            items = { ...items, sidebar_label: sidebarLabel };
         }
         return {
             ...items,
@@ -723,8 +723,6 @@ async function render(project, outputDirectory) {
 
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __nccwpck_require__(747);
-;// CONCATENATED MODULE: external "fs/promises"
-const promises_namespaceObject = require("fs/promises");;
 ;// CONCATENATED MODULE: ./src/sidebar.ts
 var sidebar_decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -741,7 +739,6 @@ var sidebar_decorate = (undefined && undefined.__decorate) || function (decorato
 // @ts-ignore
 
 // @ts-ignore
-
 
 let SidebarComponent = class SidebarComponent extends output_components.RendererComponent {
     initialize() {
@@ -780,7 +777,7 @@ let SidebarComponent = class SidebarComponent extends output_components.Renderer
             })
             : [];
         const sidebarPath = this.sidebar.sidebarPath;
-        (0,promises_namespaceObject.writeFile)(sidebarPath, JSON.stringify(sidebarItems, null, 2));
+        external_fs_.writeFileSync(sidebarPath, JSON.stringify(sidebarItems, null, 2));
         // @ts-ignore
         this.application.logger.success(`TypeDoc sidebar written to ${sidebarPath}`);
     }
@@ -1037,7 +1034,7 @@ if (process.env.DEV) {
         const overrideCondition = (request) => request.startsWith("typedoc");
         const resolveRequest = (request) => require(path.normalize(process.cwd().replace("/dist/typedocusaurus", "") + `/${originPath}node_modules/${request}`));
         overrideRequire(overrideCondition, resolveRequest);
-        const { default: generate } = __nccwpck_require__(270);
+        const { default: generate } = __nccwpck_require__(527);
         await rmdir(targetPath, { recursive: true });
         await generate(docusaurusPath, {
             entryPoints: originPath + "src",

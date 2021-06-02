@@ -10,7 +10,6 @@ import { RendererComponent } from 'typedoc/dist/lib/output/components';
 import { RendererEvent } from 'typedoc/dist/lib/output/events';
 
 import { SidebarItem, SidebarOptions } from './types';
-import { writeFile } from 'fs/promises';
 
 @Component({ name: 'sidebar' })
 export class SidebarComponent extends RendererComponent {
@@ -74,7 +73,7 @@ export class SidebarComponent extends RendererComponent {
 
     const sidebarPath = this.sidebar.sidebarPath;
 
-    writeFile(sidebarPath, JSON.stringify(sidebarItems, null, 2));
+    fs.writeFileSync(sidebarPath, JSON.stringify(sidebarItems, null, 2));
     // @ts-ignore
     this.application.logger.success(
       `TypeDoc sidebar written to ${sidebarPath}`,
