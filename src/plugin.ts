@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Application } from 'typedoc';
 // @ts-ignore
-import * as MarkdownPlugin from 'typedoc-plugin-markdown';
+import { load } from 'typedoc-plugin-markdown';
 
 import { FrontMatterComponent } from './front-matter';
 import { addOptions, getOptions } from './options';
@@ -24,7 +24,7 @@ export default async function generate(
   const app = new Application();
 
   // load the markdown plugin
-  MarkdownPlugin(app);
+  load(app);
 
   // customise render
   app.renderer.render = render;
