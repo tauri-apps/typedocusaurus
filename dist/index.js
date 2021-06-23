@@ -840,7 +840,7 @@ async function generate(siteDir, opts) {
     // initialize and build app
     const app = new _notfoundtypedoc.Application();
     // load the markdown plugin
-    _notfoundtypedoc_plugin_markdown(app);
+    (0,_notfoundtypedoc_plugin_markdown.load)(app);
     // customise render
     app.renderer.render = render;
     // add plugin options
