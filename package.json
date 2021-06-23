@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "run-source": "node index.js",
-    "pkg": "ncc build src/index.ts -o dist"
+    "pkg": "ncc build src/index.ts -o dist -e typedoc -e typedoc-plugin-markdown"
   },
   "devDependencies": {
     "@types/node": "^14.14.35",

@@ -453,7 +453,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 527:
+/***/ 879:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
@@ -465,10 +465,10 @@ __nccwpck_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ generate)
 });
 
-// EXTERNAL MODULE: ./node_modules/@vercel/ncc/dist/ncc/@@notfound.js?typedoc
-var _notfoundtypedoc = __nccwpck_require__(360);
-// EXTERNAL MODULE: ./node_modules/@vercel/ncc/dist/ncc/@@notfound.js?typedoc-plugin-markdown
-var _notfoundtypedoc_plugin_markdown = __nccwpck_require__(536);
+;// CONCATENATED MODULE: external "typedoc"
+const external_typedoc_namespaceObject = require("typedoc");;
+;// CONCATENATED MODULE: external "typedoc-plugin-markdown"
+const external_typedoc_plugin_markdown_namespaceObject = require("typedoc-plugin-markdown");;
 // EXTERNAL MODULE: external "path"
 var external_path_ = __nccwpck_require__(622);
 // EXTERNAL MODULE: ./node_modules/@vercel/ncc/dist/ncc/@@notfound.js?typedoc/dist/lib/converter/components
@@ -586,19 +586,19 @@ let FrontMatterComponent = class FrontMatterComponent extends output_components.
     }
 };
 __decorate([
-    (0,_notfoundtypedoc.BindOption)('out')
+    (0,external_typedoc_namespaceObject.BindOption)('out')
 ], FrontMatterComponent.prototype, "out", void 0);
 __decorate([
-    (0,_notfoundtypedoc.BindOption)('sidebar')
+    (0,external_typedoc_namespaceObject.BindOption)('sidebar')
 ], FrontMatterComponent.prototype, "sidebar", void 0);
 __decorate([
-    (0,_notfoundtypedoc.BindOption)('globalsTitle')
+    (0,external_typedoc_namespaceObject.BindOption)('globalsTitle')
 ], FrontMatterComponent.prototype, "globalsTitle", void 0);
 __decorate([
-    (0,_notfoundtypedoc.BindOption)('readmeTitle')
+    (0,external_typedoc_namespaceObject.BindOption)('readmeTitle')
 ], FrontMatterComponent.prototype, "readmeTitle", void 0);
 __decorate([
-    (0,_notfoundtypedoc.BindOption)('entryDocument')
+    (0,external_typedoc_namespaceObject.BindOption)('entryDocument')
 ], FrontMatterComponent.prototype, "entryDocument", void 0);
 FrontMatterComponent = __decorate([
     (0,components.Component)({ name: 'front-matter' })
@@ -671,8 +671,8 @@ const getOptions = (siteDir, opts) => {
  */
 const addOptions = (app) => {
     // configure deault typedoc options
-    app.options.addReader(new _notfoundtypedoc.TypeDocReader());
-    app.options.addReader(new _notfoundtypedoc.TSConfigReader());
+    app.options.addReader(new external_typedoc_namespaceObject.TypeDocReader());
+    app.options.addReader(new external_typedoc_namespaceObject.TSConfigReader());
     // expose plugin options to typedoc so we can access if required
     app.options.addDeclaration({
         name: 'id',
@@ -694,7 +694,7 @@ const addOptions = (app) => {
     });
     app.options.addDeclaration({
         name: 'sidebar',
-        type: _notfoundtypedoc.ParameterType.Mixed,
+        type: external_typedoc_namespaceObject.ParameterType.Mixed,
     });
 };
 
@@ -800,13 +800,13 @@ let SidebarComponent = class SidebarComponent extends output_components.Renderer
     }
 };
 sidebar_decorate([
-    (0,_notfoundtypedoc.BindOption)('sidebar')
+    (0,external_typedoc_namespaceObject.BindOption)('sidebar')
 ], SidebarComponent.prototype, "sidebar", void 0);
 sidebar_decorate([
-    (0,_notfoundtypedoc.BindOption)('siteDir')
+    (0,external_typedoc_namespaceObject.BindOption)('siteDir')
 ], SidebarComponent.prototype, "siteDir", void 0);
 sidebar_decorate([
-    (0,_notfoundtypedoc.BindOption)('out')
+    (0,external_typedoc_namespaceObject.BindOption)('out')
 ], SidebarComponent.prototype, "out", void 0);
 SidebarComponent = sidebar_decorate([
     (0,components.Component)({ name: 'sidebar' })
@@ -838,9 +838,9 @@ async function generate(siteDir, opts) {
     //   writeSidebar(options.sidebar, 'module.exports=[];');
     // }
     // initialize and build app
-    const app = new _notfoundtypedoc.Application();
+    const app = new external_typedoc_namespaceObject.Application();
     // load the markdown plugin
-    (0,_notfoundtypedoc_plugin_markdown.load)(app);
+    (0,external_typedoc_plugin_markdown_namespaceObject.load)(app);
     // customise render
     app.renderer.render = render;
     // add plugin options
@@ -862,22 +862,6 @@ async function generate(siteDir, opts) {
     // generate or watch app
     return app.generateDocs(project, options.outputDirectory);
 }
-
-
-/***/ }),
-
-/***/ 360:
-/***/ ((module) => {
-
-module.exports = eval("require")("typedoc");
-
-
-/***/ }),
-
-/***/ 536:
-/***/ ((module) => {
-
-module.exports = eval("require")("typedoc-plugin-markdown");
 
 
 /***/ }),
@@ -1034,7 +1018,7 @@ if (process.env.DEV) {
         const overrideCondition = (request) => request.startsWith("typedoc");
         const resolveRequest = (request) => require(path.normalize(process.cwd().replace("/dist/typedocusaurus", "") + `/${originPath}node_modules/${request}`));
         overrideRequire(overrideCondition, resolveRequest);
-        const { default: generate } = __nccwpck_require__(527);
+        const { default: generate } = __nccwpck_require__(879);
         await rmdir(targetPath, { recursive: true });
         await generate(docusaurusPath, {
             entryPoints: originPath + "src",
