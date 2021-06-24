@@ -75,7 +75,7 @@ export class SidebarComponent extends RendererComponent {
 
     fs.writeFileSync(sidebarPath, JSON.stringify(sidebarItems, null, 2));
     // @ts-ignore
-    this.application.logger.log(sidebarItems);
+    this.application.logger.log(JSON.stringify(sidebarItems, null, 2));
     // @ts-ignore
     this.application.logger.success(
       `TypeDoc sidebar written to ${sidebarPath}`,
