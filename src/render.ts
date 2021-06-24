@@ -26,7 +26,7 @@ export async function render(
     output.urls?.forEach((mapping: UrlMapping, i) => {
       this.renderDocument(output.createPageEvent(mapping));
       console.log(
-        `\rGenerated ${i + 1} of ${output.urls?.length} TypeDoc docs`,
+        `\rGenerated ${JSON.stringify(output.urls[i])} (${i + 1} of ${output.urls?.length} TypeDoc docs)`,
       );
     });
     console.log(`\n`);

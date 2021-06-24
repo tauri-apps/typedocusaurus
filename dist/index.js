@@ -714,7 +714,7 @@ async function render(project, outputDirectory) {
         (_a = output.urls) === null || _a === void 0 ? void 0 : _a.forEach((mapping, i) => {
             var _a;
             this.renderDocument(output.createPageEvent(mapping));
-            console.log(`\rGenerated ${i + 1} of ${(_a = output.urls) === null || _a === void 0 ? void 0 : _a.length} TypeDoc docs`);
+            console.log(`\rGenerated ${JSON.stringify(output.urls[i])} (${i + 1} of ${(_a = output.urls) === null || _a === void 0 ? void 0 : _a.length} TypeDoc docs)`);
         });
         console.log(`\n`);
         this.trigger(events.RendererEvent.END, output);
@@ -778,6 +778,8 @@ let SidebarComponent = class SidebarComponent extends output_components.Renderer
             : [];
         const sidebarPath = this.sidebar.sidebarPath;
         external_fs_.writeFileSync(sidebarPath, JSON.stringify(sidebarItems, null, 2));
+        // @ts-ignore
+        this.application.logger.log(sidebarItems);
         // @ts-ignore
         this.application.logger.success(`TypeDoc sidebar written to ${sidebarPath}`);
     }
