@@ -77,7 +77,7 @@ export class SidebarComponent extends RendererComponent {
     // @ts-ignore
     this.application.logger.log(JSON.stringify(sidebarItems, null, 2));
     // @ts-ignore
-    this.application.logger.success(
+    this.application.logger.log(
       `TypeDoc sidebar written to ${sidebarPath}`,
     );
   }

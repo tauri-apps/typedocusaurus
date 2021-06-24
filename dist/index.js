@@ -716,7 +716,6 @@ async function render(project, outputDirectory) {
             this.renderDocument(output.createPageEvent(mapping));
             console.log(`\rGenerated ${JSON.stringify(output.urls[i].url)} (${i + 1} of ${(_a = output.urls) === null || _a === void 0 ? void 0 : _a.length} TypeDoc docs)`);
         });
-        console.log(`\n`);
         this.trigger(events.RendererEvent.END, output);
     }
 }
@@ -781,7 +780,7 @@ let SidebarComponent = class SidebarComponent extends output_components.Renderer
         // @ts-ignore
         this.application.logger.log(JSON.stringify(sidebarItems, null, 2));
         // @ts-ignore
-        this.application.logger.success(`TypeDoc sidebar written to ${sidebarPath}`);
+        this.application.logger.log(`TypeDoc sidebar written to ${sidebarPath}`);
     }
     /**
      * returns a sidebar category node

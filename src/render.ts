@@ -29,7 +29,6 @@ export async function render(
         `\rGenerated ${JSON.stringify(output.urls[i].url)} (${i + 1} of ${output.urls?.length} TypeDoc docs)`,
       );
     });
-    console.log(`\n`);
     this.trigger(RendererEvent.END, output);
   }
 }
