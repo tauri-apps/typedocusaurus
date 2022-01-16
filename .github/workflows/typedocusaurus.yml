@@ -1,5 +1,4 @@
 name: 'typedocusaurus'
-
 on:
   workflow_dispatch:
     inputs:
