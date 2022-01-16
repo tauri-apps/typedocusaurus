@@ -2,15 +2,13 @@ name: Typedocusaurus Update
 
 on:
   workflow_dispatch
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       sourcePath:
-#         required: true
-#       targetPath:
-#         required: true
 jobs:
   update-docs:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Test!"
+      - run: echo "Beginning job..."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo "Repo has been cloned..."
+      - run: yarn && yarn build
+      

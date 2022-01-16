@@ -4,17 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "run-source": "node index.js",
-    "pkg": "ncc build src/index.ts -o dist -e typedoc -e typedoc-plugin-markdown"
+    "build": "typedoc --plugin typedoc-plugin-markdown --out docs api/src --tsconfig api/tsconfig.json --hideInPageTOC true --hideBreadcrumbs true"
   },
   "devDependencies": {
-    "@types/node": "^14.14.35",
-    "@vercel/ncc": "^0.28.5",
-    "override-require": "^1.1.1",
-    "tslib": "^2.1.0",
-    "typescript": "^4.2.3"
-  },
-  "dependencies": {
-    "@actions/core": "^1.2.6"
+    "docusaurus-plugin-typedoc": "^0.16.7",
+    "typedoc": "^0.22.10",
+    "typedoc-plugin-markdown": "^3.11.11",
+    "typescript": "^4.5.4"
   }
 }
