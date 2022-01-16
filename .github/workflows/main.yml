@@ -6,5 +6,9 @@ jobs:
   update-docs:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "Beginning job..."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo "Repo has been cloned..."
       - run: yarn run
       
