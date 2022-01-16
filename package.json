@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "run": "typedoc --plugin typedoc-plugin-markdown --out docs api/src --tsconfig api/tsconfig.json --hideInPageTOC true --hideBreadcrumbs true"
+    "build": "typedoc --plugin typedoc-plugin-markdown --out docs api/src --tsconfig api/tsconfig.json --hideInPageTOC true --hideBreadcrumbs true"
   },
   "devDependencies": {
     "docusaurus-plugin-typedoc": "^0.16.7",
