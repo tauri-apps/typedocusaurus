@@ -1,10 +1,14 @@
 name: 'typedocusaurus'
-description: 'Generate Typedoc to Docusaurus.'
-inputs:
-  sourcePath:
-    required: true
-  targetPath:
-    required: true
-runs:
-  using: 'node12'
-  main: 'dist/index.js'
+
+on:
+  workflow_dispatch:
+    inputs:
+      sourcePath:
+        required: true
+      targetPath:
+        required: true
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test!"
