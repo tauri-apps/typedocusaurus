@@ -2,15 +2,9 @@ name: Typedocusaurus Update
 
 on:
   workflow_dispatch
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       sourcePath:
-#         required: true
-#       targetPath:
-#         required: true
 jobs:
   update-docs:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Test!"
+      - run: yarn run
+      
