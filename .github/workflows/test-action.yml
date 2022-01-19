@@ -2,6 +2,7 @@ name: test action
 
 on:
   pull_request:
+  push:
 
 jobs:
   update-docs:
