@@ -20,9 +20,11 @@ jobs:
           repository: tauri-apps/tauri
           path: tauri
       - uses: actions/setup-node@v2
+        with:
+          path: ./tauri/tooling/api/
       - name: run typedocusaurus
         uses: ./
         with:
           originPath: ./tauri/tooling/api/
-          targetPath: ./tauri-docs/docs/en/api/js/
+          targetPath: ./tauri-docs/docs/api/js/
           docusaurusPath: ./tauri-docs/
