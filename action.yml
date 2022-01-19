@@ -3,8 +3,6 @@ description: 'Generate Typedoc to Docusaurus.'
 inputs:
   originPath:
     required: true
-  sidebarFile:
-    required: true
   targetPath:
     required: true
   docusaurusPath:

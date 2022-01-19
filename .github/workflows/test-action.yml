@@ -2,6 +2,7 @@ name: test action
 
 on:
   pull_request:
+  push:
 
 jobs:
   update-docs:
@@ -22,6 +23,5 @@ jobs:
         uses: ./
         with:
           originPath: ./tauri/tooling/api/
-          sidebarFile: ./tauri-docs/sidebars/typedoc.json
-          targetPath: ./tauri-docs/docs/en/api/js/
+          targetPath: ./tauri-docs/docs/api/js/
           docusaurusPath: ./tauri-docs/

@@ -453,7 +453,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 879:
+/***/ 895:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
@@ -721,112 +721,10 @@ async function render(project, outputDirectory) {
     }
 }
 
-// EXTERNAL MODULE: external "fs"
-var external_fs_ = __nccwpck_require__(747);
-;// CONCATENATED MODULE: ./src/sidebar.ts
-var sidebar_decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-// @ts-ignore
-
-// @ts-ignore
-
-// @ts-ignore
-
-// @ts-ignore
-
-let SidebarComponent = class SidebarComponent extends output_components.RendererComponent {
-    initialize() {
-        // @ts-ignore
-        this.listenTo(this.application.renderer, {
-            [events.RendererEvent.BEGIN]: this.onRendererBegin,
-        });
-    }
-    async onRendererBegin(renderer) {
-        var _a;
-        // @ts-ignore
-        const navigation = (_a = this.application.renderer.theme) === null || _a === void 0 ? void 0 : _a.getNavigation(renderer.project);
-        const out = this.out.match(/(?:.*)en\/(.*)/)[1];
-        // map the navigation object to a Docuaurus sidebar format
-        const sidebarItems = (navigation === null || navigation === void 0 ? void 0 : navigation.children)
-            ? navigation.children.map((navigationItem) => {
-                if (navigationItem.isLabel) {
-                    const sidebarCategoryItems = navigationItem.children
-                        ? navigationItem.children.map((navItem) => {
-                            const url = this.getUrlKey(out, navItem.url);
-                            if (navItem.children && navItem.children.length > 0) {
-                                const sidebarCategoryChildren = navItem.children.map((childGroup) => this.getSidebarCategory(childGroup.title, childGroup.children
-                                    ? childGroup.children.map((childItem) => this.getUrlKey(out, childItem.url))
-                                    : []));
-                                return this.getSidebarCategory(navItem.title, [
-                                    url,
-                                    ...sidebarCategoryChildren,
-                                ]);
-                            }
-                            return url;
-                        })
-                        : [];
-                    return this.getSidebarCategory(navigationItem.title, sidebarCategoryItems);
-                }
-                return this.getUrlKey(out, navigationItem.url);
-            })
-            : [];
-        const sidebarPath = this.sidebar.sidebarPath;
-        external_fs_.writeFileSync(sidebarPath, JSON.stringify(sidebarItems, null, 2));
-        // @ts-ignore
-        this.application.logger.success(`TypeDoc sidebar written to ${sidebarPath}`);
-    }
-    /**
-     * returns a sidebar category node
-     */
-    getSidebarCategory(title, items) {
-        return {
-            items,
-            type: 'category',
-            label: title,
-        };
-    }
-    /**
-     * returns the url key for relevant doc
-     */
-    getUrlKey(out, url) {
-        const urlKey = url.replace('.md', '');
-        return out ? out + '/' + urlKey : urlKey;
-    }
-};
-sidebar_decorate([
-    (0,external_typedoc_namespaceObject.BindOption)('sidebar')
-], SidebarComponent.prototype, "sidebar", void 0);
-sidebar_decorate([
-    (0,external_typedoc_namespaceObject.BindOption)('siteDir')
-], SidebarComponent.prototype, "siteDir", void 0);
-sidebar_decorate([
-    (0,external_typedoc_namespaceObject.BindOption)('out')
-], SidebarComponent.prototype, "out", void 0);
-SidebarComponent = sidebar_decorate([
-    (0,components.Component)({ name: 'sidebar' })
-], SidebarComponent);
-
-/**
- * Write content to sidebar file
- */
-const writeSidebar = (sidebar, content) => {
-    if (!fs.existsSync(path.dirname(sidebar.sidebarPath))) {
-        fs.mkdirSync(path.dirname(sidebar.sidebarPath));
-    }
-    fs.writeFileSync(sidebar.sidebarPath, content);
-};
-
 ;// CONCATENATED MODULE: ./src/plugin.ts
 // @ts-ignore
 
 // @ts-ignore
-
 
 
 
@@ -850,9 +748,6 @@ async function generate(siteDir, opts) {
     // add frontmatter component to typedoc renderer
     // @ts-ignore
     app.renderer.addComponent('fm', new FrontMatterComponent(app.renderer));
-    // add sidebar component to typedoc renderer
-    // @ts-ignore
-    app.renderer.addComponent('sidebar', new SidebarComponent(app.renderer));
     // return the generated reflections
     const project = app.convert();
     // if project is undefined typedoc has a problem - error logging will be supplied by typedoc.
@@ -1011,14 +906,13 @@ if (process.env.DEV) {
     try {
         // Where your docs live, should be the folder containing the crates docs
         const originPath = core.getInput("originPath"); // e.g. "/path/to/project/src/";
-        const sidebarFile = core.getInput("sidebarFile");
         // Where you'll save your MD files
         const targetPath = core.getInput("targetPath"); // e.g. "/path/to/docusaurus/website/docs/api/js/";
         const docusaurusPath = core.getInput("docusaurusPath");
         const overrideCondition = (request) => request.startsWith("typedoc");
         const resolveRequest = (request) => require(path.normalize(process.cwd().replace("/dist/typedocusaurus", "") + `/${originPath}node_modules/${request}`));
         overrideRequire(overrideCondition, resolveRequest);
-        const { default: generate } = __nccwpck_require__(879);
+        const { default: generate } = __nccwpck_require__(895);
         await rmdir(targetPath, { recursive: true });
         await generate(docusaurusPath, {
             entryPoints: originPath + "src",
@@ -1028,9 +922,6 @@ if (process.env.DEV) {
             hideBreadcrumbs: true,
             watch: false,
             tsconfig: originPath + "tsconfig.json",
-            sidebar: {
-                sidebarFile,
-            },
             readme: "none",
         });
         console.log("Tasks completed!");

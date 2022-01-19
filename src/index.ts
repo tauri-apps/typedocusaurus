@@ -15,7 +15,6 @@ if (process.env.DEV) {
     // Where your docs live, should be the folder containing the crates docs
     const originPath = core.getInput("originPath"); // e.g. "/path/to/project/src/";
 
-    const sidebarFile = core.getInput("sidebarFile");
     // Where you'll save your MD files
     const targetPath = core.getInput("targetPath"); // e.g. "/path/to/docusaurus/website/docs/api/js/";
     const docusaurusPath = core.getInput("docusaurusPath");
@@ -41,9 +40,6 @@ if (process.env.DEV) {
       hideBreadcrumbs: true,
       watch: false,
       tsconfig: originPath + "tsconfig.json",
-      sidebar: {
-        sidebarFile,
-      },
       readme: "none",
     });
 

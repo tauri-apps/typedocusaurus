@@ -6,7 +6,6 @@ import { load } from 'typedoc-plugin-markdown';
 import { FrontMatterComponent } from './front-matter';
 import { addOptions, getOptions } from './options';
 import { render } from './render';
-import { SidebarComponent } from './sidebar';
 import { PluginOptions } from './types';
 
 
@@ -38,10 +37,6 @@ export default async function generate(
   // add frontmatter component to typedoc renderer
   // @ts-ignore
   app.renderer.addComponent('fm', new FrontMatterComponent(app.renderer));
-
-  // add sidebar component to typedoc renderer
-  // @ts-ignore
-  app.renderer.addComponent('sidebar', new SidebarComponent(app.renderer));
 
   // return the generated reflections
   const project = app.convert();
