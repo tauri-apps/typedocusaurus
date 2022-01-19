@@ -13,11 +13,7 @@ export default async function generate(
   siteDir: string,
   opts: Partial<PluginOptions>,
 ) {
-  // we need to generate an empty sidebar up-front so it can be resolved from sidebars.js
   const options = getOptions(siteDir, opts);
-  // if (options.sidebar) {
-  //   writeSidebar(options.sidebar, 'module.exports=[];');
-  // }
 
   // initialize and build app
   const app = new Application();

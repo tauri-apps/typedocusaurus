@@ -16,7 +16,7 @@ import {
   // @ts-ignore
 } from 'typedoc';
 
-import { PluginOptions, SidebarOptions } from './types';
+import { PluginOptions } from './types';
 
 /**
  * Default plugin options
@@ -28,13 +28,6 @@ const DEFAULT_PLUGIN_OPTIONS: PluginOptions = {
   entryDocument: 'index.md',
   hideInPageTOC: true,
   hideBreadcrumbs: true,
-  sidebar: {
-    fullNames: false,
-    sidebarFile: 'typedoc-sidebar.js',
-    indexLabel: 'Table of contents',
-    readmeLabel: 'Readme',
-    sidebarPath: '',
-  },
   plugin: ['none'],
   outputDirectory: '',
   siteDir: '',
@@ -54,22 +47,6 @@ export const getOptions = (
     ...DEFAULT_PLUGIN_OPTIONS,
     ...opts,
   };
-  // sidebar
-  if (opts.sidebar === null) {
-    options = { ...options, sidebar: null };
-  } else {
-    const sidebar = {
-      ...DEFAULT_PLUGIN_OPTIONS.sidebar,
-      ...opts.sidebar,
-    } as SidebarOptions;
-    options = {
-      ...options,
-      sidebar: {
-        ...sidebar,
-        sidebarPath: path.resolve(siteDir, sidebar.sidebarFile),
-      },
-    };
-  }
   // additional
   options = {
     ...options,
@@ -112,9 +89,4 @@ export const addOptions = (app: Application) => {
   app.options.addDeclaration({
     name: 'readmeTitle',
   } as StringDeclarationOption);
-
-  app.options.addDeclaration({
-    name: 'sidebar',
-    type: ParameterType.Mixed,
-  } as MixedDeclarationOption);
 };

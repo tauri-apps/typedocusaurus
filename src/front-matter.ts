@@ -9,7 +9,7 @@ import { RendererComponent } from 'typedoc/dist/lib/output/components';
 // @ts-ignore
 import { PageEvent } from 'typedoc/dist/lib/output/events';
 
-import { FrontMatter, Sidebar } from './types';
+import { FrontMatter } from './types';
 
 // @ts-ignore
 import { reflectionTitle } from 'typedoc-plugin-markdown/dist/resources/helpers/reflection-title';
@@ -62,8 +62,6 @@ const escapeString=(str: string) => str.replace(/([^\\])'/g, '$1\\\'');
 export class FrontMatterComponent extends RendererComponent {
   @BindOption('out')
   out!: string;
-  @BindOption('sidebar')
-  sidebar!: Sidebar;
   @BindOption('globalsTitle')
   globalsTitle!: string;
   @BindOption('readmeTitle')
@@ -88,34 +86,15 @@ export class FrontMatterComponent extends RendererComponent {
 
   getYamlItems(page: PageEvent): any {
     const pageTitle = this.getTitle(page);
-    const sidebarLabel = this.getSidebarLabel(page);
     let items: FrontMatter = {
       title: pageTitle,
     };
-    if (sidebarLabel && sidebarLabel !== pageTitle) {
-      items = { ...items, sidebar_label: sidebarLabel };
-    }
+
     return {
       ...items,
       custom_edit_url: null,
       hide_title: true,
     };
-  }
-
-  getSidebarLabel(page: PageEvent) {
-    if (!this.sidebar) {
-      return null;
-    }
-    if (page.url === this.entryDocument) {
-      return page.url === page.project.url
-        ? this.sidebar.indexLabel
-        : this.sidebar.readmeLabel;
-    }
-
-    if (page.url === this.globalsFile) {
-      return this.sidebar.indexLabel;
-    }
-    return this.sidebar.fullNames ? page.model.getFullName() : page.model.name;
   }
 
   getId(page: PageEvent) {

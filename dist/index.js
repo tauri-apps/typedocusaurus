@@ -547,32 +547,14 @@ let FrontMatterComponent = class FrontMatterComponent extends output_components.
     }
     getYamlItems(page) {
         const pageTitle = this.getTitle(page);
-        const sidebarLabel = this.getSidebarLabel(page);
         let items = {
             title: pageTitle,
         };
-        if (sidebarLabel && sidebarLabel !== pageTitle) {
-            items = { ...items, sidebar_label: sidebarLabel };
-        }
         return {
             ...items,
             custom_edit_url: null,
             hide_title: true,
         };
-    }
-    getSidebarLabel(page) {
-        if (!this.sidebar) {
-            return null;
-        }
-        if (page.url === this.entryDocument) {
-            return page.url === page.project.url
-                ? this.sidebar.indexLabel
-                : this.sidebar.readmeLabel;
-        }
-        if (page.url === this.globalsFile) {
-            return this.sidebar.indexLabel;
-        }
-        return this.sidebar.fullNames ? page.model.getFullName() : page.model.name;
     }
     getId(page) {
         return external_path_.basename(page.url, external_path_.extname(page.url));
@@ -588,9 +570,6 @@ let FrontMatterComponent = class FrontMatterComponent extends output_components.
 __decorate([
     (0,external_typedoc_namespaceObject.BindOption)('out')
 ], FrontMatterComponent.prototype, "out", void 0);
-__decorate([
-    (0,external_typedoc_namespaceObject.BindOption)('sidebar')
-], FrontMatterComponent.prototype, "sidebar", void 0);
 __decorate([
     (0,external_typedoc_namespaceObject.BindOption)('globalsTitle')
 ], FrontMatterComponent.prototype, "globalsTitle", void 0);
@@ -618,13 +597,6 @@ const DEFAULT_PLUGIN_OPTIONS = {
     entryDocument: 'index.md',
     hideInPageTOC: true,
     hideBreadcrumbs: true,
-    sidebar: {
-        fullNames: false,
-        sidebarFile: 'typedoc-sidebar.js',
-        indexLabel: 'Table of contents',
-        readmeLabel: 'Readme',
-        sidebarPath: '',
-    },
     plugin: ['none'],
     outputDirectory: '',
     siteDir: '',
@@ -640,23 +612,6 @@ const getOptions = (siteDir, opts) => {
         ...DEFAULT_PLUGIN_OPTIONS,
         ...opts,
     };
-    // sidebar
-    if (opts.sidebar === null) {
-        options = { ...options, sidebar: null };
-    }
-    else {
-        const sidebar = {
-            ...DEFAULT_PLUGIN_OPTIONS.sidebar,
-            ...opts.sidebar,
-        };
-        options = {
-            ...options,
-            sidebar: {
-                ...sidebar,
-                sidebarPath: external_path_.resolve(siteDir, sidebar.sidebarFile),
-            },
-        };
-    }
     // additional
     options = {
         ...options,
@@ -692,10 +647,6 @@ const addOptions = (app) => {
     app.options.addDeclaration({
         name: 'readmeTitle',
     });
-    app.options.addDeclaration({
-        name: 'sidebar',
-        type: external_typedoc_namespaceObject.ParameterType.Mixed,
-    });
 };
 
 ;// CONCATENATED MODULE: ./src/render.ts
@@ -730,11 +681,7 @@ async function render(project, outputDirectory) {
 
 
 async function generate(siteDir, opts) {
-    // we need to generate an empty sidebar up-front so it can be resolved from sidebars.js
     const options = getOptions(siteDir, opts);
-    // if (options.sidebar) {
-    //   writeSidebar(options.sidebar, 'module.exports=[];');
-    // }
     // initialize and build app
     const app = new external_typedoc_namespaceObject.Application();
     // load the markdown plugin
