@@ -2,7 +2,6 @@ name: test action
 
 on:
   pull_request:
-  push:
 
 jobs:
   update-docs:
@@ -21,7 +20,8 @@ jobs:
           path: tauri
       - uses: actions/setup-node@v2
       - name: run typedocusaurus
+        uses: ./
         with:
           originPath: ./tauri/tooling/api/
-          targetPath: ./tauri-docs/docs/api/js/
+          targetPath: ./tauri-docs/docs/en/api/js/
           docusaurusPath: ./tauri-docs/
